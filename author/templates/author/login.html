@@ -2,11 +2,11 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<div class="content-section">
+<div class="content-section" style="text-align: center;">
     <form action="" method="POST">
         {% csrf_token %}
         <fieldset class="form-group">
-            <legend class="border-bottom" style="text-align: center;">
+            <legend class="border-bottom">
                 Login
             </legend>
             {{ form|crispy}}
