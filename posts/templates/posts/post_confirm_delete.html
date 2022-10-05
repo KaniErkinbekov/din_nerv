@@ -1,0 +1,14 @@
+{% extends 'posts/index.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form action="" method="POST">
+{% csrf_token %}
+<h2>Are you sure</h2>
+<button class="btn btn-primary" type="submit">
+    Yes Delete
+</button>
+<a class="btn btn-primary" href="{% url 'detail' object.id %}">
+    Cancel
+</a>
+</form>
+{% endblock %}

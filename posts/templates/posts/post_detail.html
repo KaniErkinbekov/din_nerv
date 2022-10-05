@@ -1,0 +1,16 @@
+{% extends 'posts/index.html' %}
+
+{% block content %}
+<img src="{{ object.image.url }}">
+{{ object.title }}
+{{ object.description }}
+{{ object.date }}
+{{ object.author }}
+<br>
+<a href="{% url 'update' object.id %}" class="btn btn-primary">
+    Update
+</a>
+<a href="{% url 'delete' object.id %}" class="btn btn-primary">
+    Delete
+</a>
+{% endblock %}

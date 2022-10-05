@@ -1,0 +1,35 @@
+{% extends "posts/index.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="content-section">
+    <form action="" method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom" style="text-align: center;">
+                Login
+            </legend>
+            {{ form|crispy}}
+        </fieldset>
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary btn-block" value="Sign In">
+            <style>
+                .btn-block {
+                max-width: 120px;
+                margin: 0 auto;
+                padding: 12px 0;
+                border-radius: 4px;
+                }
+            </style>
+        </div>
+    </form>
+    <div style="text-align: center;">
+        <small class="text-muted" >
+            No account <a href="#">Sign Up</a>
+            
+        </small>
+    </div>
+    
+</div>
+
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "posts/index.html" %}
+
+{% block content %}
+
+<h2 style="text-align: center;"> You have been loged out </h2>
+<div style="text-align: center;">
+    <small>
+        <a href="{% url 'login' %}">Login</a>
+    </small>
+</div>
+
+{% endblock %}
