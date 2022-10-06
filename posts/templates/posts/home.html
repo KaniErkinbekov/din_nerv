@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 <div class="container mb-3">
-    <h3 class="section-title mb-5" style="text-align: center;">About Our</h3>
+    <h1 class="section-title mb-5" style="text-align: center;">About Our</h1>
     {% for post in data %}
     <div class="blog-wrapper mb-3">
         <div class="img-wrapper">
@@ -10,13 +10,13 @@
         </div>
         <div class="txt-wrapper">
             <a href="{% url 'detail' post.id %}">
-            <h4 class="blog-title">{{post.title}}</h4>
+            <h2 class="blog-title">{{post.title}}</h2>
             </a>
             <p>{{post.description}}</p>
-            <h6 class="blog-footer">
+            <h3 class="blog-footer">
                 <a href="javascript:void(0)"><i class="ti-user"></i>{{post.author}}</a> |
                 <a href="javascript:void(0)"><i class="ti-thumb-up"></i>{{post.date|date:"F d, Y"}}</a>
-            </h6>
+            </h3>
         </div>
     </div>
     {% endfor %}
