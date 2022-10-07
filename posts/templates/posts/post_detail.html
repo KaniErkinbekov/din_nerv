@@ -1,16 +1,80 @@
 {% extends 'posts/index.html' %}
-
+{% load crispy_forms_tags %}
 {% block content %}
-<img src="{{ object.image.url }}">
+<div class="blog-wrapper mb-3">
+<div class="img-wrapper">
+    <img src="{{object.image.url}}">
+    
+</div>
+
 {{ object.title }}
 {{ object.description }}
 {{ object.date }}
 {{ object.author }}
 <br>
-<a href="{% url 'update' object.id %}" class="btn btn-primary">
+<form action="{% url 'like_post' object.pk %}" method="POST">
+    {% csrf_token %}
+
+    {% if liked %}
+        <button type="submit", name="post_id", value="{{ post.id }}" class="btn btn-danger btn-sm">Unlike</button>
+    {% else %}
+        <button type="submit", name="post_id", value="{{ post.id }}" class="btn btn-primary btn-sm">Like</button>
+    {% endif %}
+    {{ total_likes }} like{% if total_likes > 1 %}s{% else %}{% endif %}
+</form>
+<br>
+<a href="{% url 'update' object.id %}" class="btn btn-primary m-3">
     Update
 </a>
-<a href="{% url 'delete' object.id %}" class="btn btn-primary">
+<a href="{% url 'delete' object.id %}" class="btn btn-primary ">
     Delete
 </a>
-{% endblock %}
+
+<form action="" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <fieldset>
+      {{form|crispy}}
+  </fieldset>
+  <button class="btn btn-primary" type="submit">
+    comment
+</button>
+<div class="col-md-8 card mb-4  mt-3 ">
+  <div class="card-body">
+    <!-- comments -->
+    <h2>{{ comments.count }} comments</h2>
+
+    {% for comment in comments %}
+    <div class="comments" style="padding: 10px;">
+      <p class="font-weight-bold">
+        {{ comment.name }}
+        <span class=" text-muted font-weight-normal">
+          {{ comment.created_on }}
+        </span>
+      </p>
+      {{ comment.body | linebreaks }}
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<div class="col-md-8 card mb-4  mt-3 ">
+  <div class="card-body">
+    {% if new_comment %}
+    <div class="alert alert-success" role="alert">
+      Your comment is awaiting moderation
+    </div>
+    {% else %}
+    <h3>Leave a comment</h3>
+    <form method="post" style="margin-top: 1.3em;">
+      {{ comment_form.as_p }}
+      {% csrf_token %}
+      <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
+    </form>
+    {% endif %}
+  </div>
+</div>
+
+</div>
+
+
+
+{% endblock content %}
